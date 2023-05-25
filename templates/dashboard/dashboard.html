@@ -1,0 +1,40 @@
+{% extends 'layouts/base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+
+
+{% if request.user.is_applicant %}
+{% if not request.user.has_resume %}
+<div class="alert alert-danger">
+    <b>You are seeing this because you not created any company account yet. Create one <a href="{% url 'artisan_register' %}">Here</a></b>
+</div>
+<section>
+    <div class="p-5 mb-4 bg-light rounded-3">
+        <div class="container-fluid py-5">
+            <h1 class="display-5 fw-bold">Welcome, {{request.user }}</h1>
+            <p class="col-md-8 fs-4">Artisan's Dashboard</p>
+           
+        </div>
+    </div>
+</section>
+{% elif request.user.is_recruiter %}
+
+{% if not request.user.has_company %}
+<div class="alert alert-danger" role="alert">
+ <b>You are seeing this because you have not given your full details. Please supply the information needed <a href="{% url 'account:update_company' %}">here</a></b>
+</div>
+{% endif %}
+
+<section>
+    <div class="p-5 mb-4 bg-light rounded-3">
+        <div class="container-fluid py-5">
+            <h1 class="display-5 fw-bold">Welcome, {{request.user }}</h1>
+            <p class="col-md-8 fs-4">Employer's Dashboard</p>
+            <!--<button class="btn btn-danger btn-lg">enter button</button>-->
+        </div>
+    </div>
+</section>
+{% endif %}
+{% endblock %}

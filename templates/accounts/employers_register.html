@@ -1,0 +1,32 @@
+{% extends 'layouts/base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+
+            <form action="" method="POST" class="p-4 p-md-5 border rounded-3 bg-light">
+                {% csrf_token %}
+                <div class="form-floating mb-3">
+                    {% render_field form.email class="form-control" %}
+                    <label for="floatingInput">Email Address</label>
+                </div>
+                <div class="form-floating mb-3">
+                    {% render_field form.password1 class="form-control" %}
+                    <label for="floatingInput">Enter Password</label>
+                </div>
+                <div class="form-floating mb-3">
+                    {% render_field form.password2 class="form-control" %}
+                    <label for="floatingInput">Confirm Password</label>
+                </div>
+                
+                <!--<div class="form-floating mb-3">
+     
+                    <label><input type="checkbox" value="remember-me">Remember me</label>
+                </div>-->
+                <button class="w-100 btn btn-lg btn-danger" type="submit">Sign Up</button>
+                <hr class="my-4">
+                <small class="text-muted"> Already have an account? <a href="{% url 'account:login' %}">Sign in</a></small>
+            </form>
+    
+
+{% endblock %}

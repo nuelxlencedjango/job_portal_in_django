@@ -1,0 +1,44 @@
+{% extends 'layouts/base.html' %}
+{% load widget_tweaks %}
+{% load humanize %}
+
+{% block content %}
+
+<section>
+    <div class="p-5 mb-4 bg-light rounded-3">
+        <div class="container-fluid py-5">
+            <h2 class="disply-5 fw-bold">Get Hired Quickly</h2><br>
+              <p class="col-md-8 fs-5 mt-3">Available JobS</p>
+        </div>
+    </div>
+</section>
+                    
+
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% if available_jobs %}
+    {% for job in available_jobs %}
+    <div class="col">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">{{ job.title }} </h5>
+                    <p class="card-text">Job Location : {{ job.location }}</p>
+                    <!--<p>is a wilder card with supporting text below as a natural lead-in to additional content</p>-->
+                    <p class="card-text">Pay: {{ job.salary|intcomma}}</p>
+                    <p class="card-text">Posted By: {{ job.employers }}</p>
+                    <a href="{% url 'product:job-details' job.pk %}" class="btn btn-danger btn-sm"> View Details</a>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">Posted on: {{ date_created|naturaltime }}</small>
+            </div>
+            
+        </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+ 
+ 
+</div>
+
+
+{% endblock %}

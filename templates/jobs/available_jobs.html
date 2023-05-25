@@ -1,0 +1,133 @@
+{% extends 'layouts/base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+<section>
+    <div class="p-5 mb-4 bg-light rounded-3">
+        <div class="container-fluid py-5">
+            <h2 class="disply-5 fw-bold">Get Hired Quickly</h2><br>
+                <div class="card">
+                    <div class="card-body">
+                        <form class="row gy-2 gx-3 align-items-center">
+                            <div class="col-sm-2">
+                                <label for="" class="visually-hidden" for="autoSizingInput">Name</label>
+                                    <input type="text" class="form-control" id="autoSizingInput" placeholder="Job keyword">
+                                </div>
+
+                                <div class="col-sm-2">
+                                    <label for="" class="visually-hidden" for="autoSizingInput">Select Location</label>
+                                    <select name="" class="form-select" id="autoSizingInput">
+                                        <option selected>Select Location</option>
+                                        <option value="1">one</option>
+                                        <option value="2">two</option>
+                                        <option value="3">three</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-sm-2">
+                                    <label for="" class="visually-hidden" for="autoSizingInput">Choose Job Type</label>
+                                    <select name="" class="form-select" id="autoSizingInput">
+                                        <option selected>Select job type</option>
+                                        <option value="1">one</option>
+                                        <option value="2">two</option>
+                                        <option value="3">three</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-sm-2">
+                                    <label for="" class="visually-hidden" for="autoSizingInput">Select Industry</label>
+                                    <select name="" class="form-select" id="autoSizingInput">
+                                        <option selected>Select Industry</option>
+                                        <option value="1">one</option>
+                                        <option value="2">two</option>
+                                        <option value="3">three</option>
+                                    </select>
+                                </div>
+                                <div class="col-auto">
+                                    <button type="submit" class="btn btn-danger">Search</button>
+                                </div>
+                        </form>    
+                        </div>
+                    </div>
+                    <p class="col-md-8 fs-6 mt-3">
+                        Welcome job search portal!Search and get your dream job here..We have thousands of job offerings for you.dont forget to leave a like when you get a job.Good luck!!
+                    </p>
+                    <button type="button" class="btn btn-danger">More Jobs</button>
+                </div>
+    </div>
+</section>
+
+<div>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="col">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">Card Title </h5>
+                    <p class="card-text">This is a wilder card with supporting text below as a natural lead-in to additional content</p>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">Last Updated 3 mins ago</small>
+            </div>
+        </div>
+    </div>
+    <div class="card h-100">
+        <div class="card-body">
+            <h5 class="card-title">Card Title </h5>
+                <p class="card-text">This is a wilder card with supporting text below as a natural lead-in to additional content</p>
+        </div>
+        <div class="card-footer">
+            <small class="text-muted">Last Updated 3 mins ago</small>
+        </div>
+    </div>
+    <div class="card h-100">
+        <div class="card-body">
+            <h5 class="card-title">Card Title </h5>
+                <p class="card-text">This is a wilder card with supporting text below as a natural lead-in to additional content</p>
+        </div>
+        <div class="card-footer">
+            <small class="text-muted">Last Updated 3 mins ago</small>
+        </div>
+    </div>
+    <div class="card h-100">
+        <div class="card-body">
+            <h5 class="card-title">Card Title </h5>
+                <p class="card-text">This is a wilder card with supporting text below as a natural lead-in to additional content</p>
+        </div>
+        <div class="card-footer">
+            <small class="text-muted">Last Updated 3 mins ago</small>
+        </div>
+    </div>
+    <div class="card h-100">
+        <div class="card-body">
+            <h5 class="card-title">Card Title </h5>
+                <p class="card-text">This is a wilder card with supporting text below as a natural lead-in to additional content</p>
+        </div>
+        <div class="card-footer">
+            <small class="text-muted">Last Updated 3 mins ago</small>
+        </div>
+    </div>
+</div>
+</div>
+<div class="row align-items-center">
+    <div class="col-md-20 mx-auto col-lg-2 mt-4">
+        <nav aria-label="">
+            <ul class="pagination">
+                <li class="page-item disabled">
+                    <a href="" class="page-link" tabindex="1" aria-disabled="true">Previous</a>
+                </li>
+                <li class="page-item"><a href="#" class="page-link">1</a></li>
+                <li class="page-item active" aria-current="page"><a href="#" class="page-link">2</a></li>
+                <li class="page-item"><a href="#" class="page-link">3</a></li>
+                <li class="page-item"><a href="#" class="page-link">Next</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+
+
+
+
+{% endblock %}

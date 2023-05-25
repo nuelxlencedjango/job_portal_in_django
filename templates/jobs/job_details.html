@@ -1,0 +1,74 @@
+{% extends 'layouts/base.html' %}
+{% load widget_tweaks %}
+{% load humanize %}
+
+{% block content %}
+
+
+<section>
+    <div class="p-5 mb-4 bg-light rounded-3">
+        <div class="container-fluid py-5">
+            <h2 class="disply-5 fw-bold">{{ available_jobs.title }}</h2><br>
+              <p class="col-md-8 fs-5 mt-3">{{ available_jobs.state }}|{{ available_jobs.job_type }}|$<span>{{ available_jobs.salary|intcomma}}</span></p>
+              {% if has_applied == False %}
+              <a href="{% url 'product:apply-job' available_jobs.pk %}" class="btn btn-danger btn-lg">Apply Now</a> 
+              {% else %}
+              <p><span class="text-danger">You have already applied for this job</span></p>
+              {% endif %}
+        </div>
+       
+    </div>
+</section>
+
+<div>
+    <section>
+        <h5>Job Description</h5>
+        <p>{{ available_jobs.requirements }}</p>
+    </section>
+</div><br>
+<div>
+    <section>
+        <h5>Ideal Candidate </h5>
+        <p>{{ available_jobs.ideal_candidate }}</p>
+    </section>
+</div><br>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="col">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">Other Details </h5>
+                    <p class="card-text">This is a wilder card with supporting text below as a natural lead-in to additional content</p>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">Last Updated 3 mins ago</small>
+            </div>
+        </div>
+    </div>
+    <div class="card h-100">
+        <div class="card-body">
+            <h5 class="card-title">About The Company </h5>
+            <p class="card-text">Name: {{available_jobs.employers.name }}</p>
+            <p class="card-text">Location: {{available_jobs.employers.city }}, {{available_jobs.employers.state }}</p>
+            <p class="card-text">Established on: {{available_jobs.employers.establisedDate }}</p>
+                <p class="card-text">This is a wilder card with supporting text below as a natural lead-in to additional content</p>
+        </div>
+        <div class="card-footer">
+            <small class="text-muted">Last Updated 3 mins ago</small>
+        </div>
+    </div>
+    <div class="card h-100">
+        <div class="card-body">
+            <h5 class="card-title">Related Jobs </h5>
+                <p class="card-text">This is a wilder card with supporting text below as a natural lead-in to additional content</p>
+        </div>
+        <div class="card-footer">
+            <small class="text-muted">Last Updated 3 mins ago</small>
+        </div>
+    </div>
+
+</div>
+
+
+
+{% endblock %}
