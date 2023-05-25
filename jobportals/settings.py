@@ -199,4 +199,4 @@ authentication_backend = ['account.backends.EmailBackend']
 
 
 
-#CSRF_TRUSTED_ORIGINS=['https://web-production-85af.up.railway.app']
+#CSRF_TRUSTED_ORIGINS=[]
