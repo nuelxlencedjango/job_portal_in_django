@@ -1,91 +1,27 @@
 {% extends 'layouts/base.html' %}
+{% block content %}
 {% load widget_tweaks %}
 {% load humanize %}
 
-{% block content %}
 
 
+<style>
+.disply-5{
+  text-align: center;
+  font-size: 28px;
+  font-family: 'Times New Roman', Times, serif;
+  padding: 10px;
+}
+.card{
+  height: 150px;
+}
+.col-auto{
+  position: relative;
+  
+  }
+</style>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-        <a href="" class="navbar-brand">DTMS</a>
-        <button class="navbar-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggle-icon"></span>
-        </button>
 
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
-            <div class="container-fluid">
-              <a class="navbar-brand" href="#">Navbar</a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                {% if request.user.is_authenticated %}
-               
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/">Home</a>
-                  </li>
-                  
-
-                  {% if request.user.is_applicant %}
-                  {% if request.user.has_resume %}
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Apply to jobs</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{% url 'job:applied-jobs' %}">Manage Job Application </a>
-                  </li>
-                  {% else %}
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Create Resume</a>
-                  </li>
-                  {% endif %}
-
-                  {% elif request.user.is_recruiter %}
-        
-                  {% if request.user.has_company %}
-                  <li class="nav-item">
-                    <a class="nav-link" href="{% url 'job:create-job' %}">Create Job Ads</a>
-                  </li>
-                  {% else %}
-                  <li class="nav-item">
-                    <a class="nav-link" href="{% url 'account:update_company' %}">Create Company</a>
-                  </li>
-                  {% endif %}
-
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Dropdown
-                    </a>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#">Action</a></li>
-                      <li><a class="dropdown-item" href="#">Another action</a></li>
-                      <li><hr class="dropdown-divider"></li>
-                      <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link disabled" href="#" tabindex="1" aria-disabled="true">{{ request.user.email }}</a>
-                  </li>
-                </ul>
-
-            
-                {% endif %}
-                {% else %}
-
-                <a href="{% url 'account:login' %}" class="btn btn-primary me-2">Login</a>
-                <a href="" class="btn btn-primary me-2">Register</a>
-                {% endif %}
-                <!--<form class="d-flex" role="search">
-                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                  <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>-->
-              </div>
-            </div>
-          </nav>
-    </div>
-</nav>
 
 {% if messages %}
 {% for mesg in messages %}
@@ -96,22 +32,22 @@
 {% endif %}
 
 
-
+<h2 class="disply-5 fw-bold">Get Hired Quickly</h2><br>
 <section>
-    <div class="p-5 mb-4 bg-light rounded-3">
-        <div class="container-fluid py-5">
-            <h2 class="disply-5 fw-bold">Get Hired Quickly</h2><br>
+    <div class="mb-4 bg-light rounded-3">
+        <div class="container">
+           
                 <div class="card">
                     <div class="card-body">
                         <form class="row gy-2 gx-3 align-items-center" method="GET">
                             <div class="col-sm-3">
-                                <label for="" class="visually-hidden" for="autoSizingInput">Name</label>
+                                <label for="" class="" for="autoSizingInput" style="color: brown;">Name</label>
                                 {% render_field filter.form.title class="form-control" id="autoSizingInput" placeholder="Job Keyword" %}
                                     <!--<input type="text" class="form-control" id="autoSizingInput" placeholder="Job keyword">-->
                                 </div>
 
                                 <div class="col-sm-3">
-                                    <label for="autoSizingInput" class="visually-hidden" for="autoSizingInput">Select Location</label>
+                                    <label for="autoSizingInput" class="" for="autoSizingInput" style="color: red;">Select Location</label>
                                     {% render_field filter.form.state class="form-select"  placeholder="Job Keyword" %}
                                     <!--<select name="" class="form-select" id="autoSizingInput">
                                         <option selected>Select Location</option>
@@ -131,6 +67,7 @@
                                     <label for=""  for="autoSizingInput">Select Industry</label>
                                     {% render_field filter.form.industry class="form-select" %}
                                 </div>
+                        
                                 <div class="col-auto">
                                     <button type="submit" class="btn btn-danger">Search</button>
                                 </div>
@@ -163,27 +100,6 @@
         </div>
     </div>
     {% endfor %}
-  
-    <div class="card h-100">
-        <div class="card-body">
-            <h5 class="card-title">Card Title </h5>
-                <p class="card-text">This is a wilder card with supporting text below as a natural lead-in to additional content</p>
-        </div>
-        <div class="card-footer">
-            <small class="text-muted">Last Updated 3 mins ago</small>
-        </div>
-    </div>
-    <div class="card h-100">
-        <div class="card-body">
-            <h5 class="card-title">Card Title </h5>
-                <p class="card-text">This is a wilder card with supporting text below as a natural lead-in to additional content</p>
-        </div>
-        <div class="card-footer">
-            <small class="text-muted">Last Updated 3 mins ago</small>
-        </div>
-    </div>
-</div>
-</div>
 
 
 

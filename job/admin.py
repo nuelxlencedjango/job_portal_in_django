@@ -6,7 +6,7 @@ from .models import *
 
 # Register your models here.
 
-admin.site.register(JobsCreated)
+admin.site.register(AvailableJobs)
 admin.site.register(ApplyJob)
-admin.site.register(State)
+admin.site.register(Location)
 admin.site.register(Industry)

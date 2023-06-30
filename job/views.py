@@ -9,14 +9,14 @@ from .forms import *
 
 
 def create_job(request):
-    if request.user.is_recruiter and request.user.has_company:
+    if request.user.is_recruiter and request.user.is_company:
 
         if request.method == 'POST':
             form = CreateJobForm(request.POST) 
             if form.is_valid():
                 job = form.save(commit=False)
                 job.user =request.user
-                job.employers =request.user.user
+                job.employers = Employers.objects.get(user=request.user)
                 job.save()
                 messages.success(request, 'Job created successfully. ' )
                 return redirect('dashboard:dashboards')
@@ -39,7 +39,7 @@ def create_job(request):
 
 
 def updateJob(request,pk):
-    job = JobsCreated.objects.get(pk=pk)
+    job = AvailableJobs.objects.get(pk=pk)
     if request.method == 'POST':
         form = JobUpdateForm(request.POST,instance=job) 
         if form.is_valid():

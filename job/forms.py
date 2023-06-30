@@ -6,7 +6,7 @@ from .models import *
 class CreateJobForm(forms.ModelForm):
 
     class Meta:
-        model = JobsCreated
+        model = AvailableJobs
         exclude = ('user', 'employers','date_created','is_available')
 
 
@@ -14,5 +14,5 @@ class CreateJobForm(forms.ModelForm):
 class JobUpdateForm(forms.ModelForm):
 
     class Meta:
-        model = JobsCreated
+        model = AvailableJobs
         exclude = ('user', 'employers','date_created','is_available')

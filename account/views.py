@@ -88,24 +88,6 @@ def loginPage(request):
             login(request,user)
             return redirect('dashboard:dashboards')
 
-            # if the user is an artisan and already registered,log him in
-            #if request.user.is_applicant:  
-                #return redirect('account:artisan-dashboard')
-            
-            # if the user is an employer and already registered,log him in
-            #elif request.user.is_recruiter:
-             #   return redirect('account:employer-dashboard')
-               
-           #if user is a superuser
-           # elif user.is_superuser:
-            #    login(request,user)
-             #   return redirect('account:admin_page')
-        
-            #if none is correct,username or password is incorrect
-            #else:
-             #   messages.info(request, 'Something went wrong')
-              #  return redirect('account:login')
-
         else:
             messages.info(request, 'Username OR password is incorrect')
             return redirect('account:login')        
@@ -124,4 +106,4 @@ def loginPage(request):
 @login_required
 def logoutPage(request):
     logout(request)
-    return redirect('account:home')
+    return redirect('products:home')

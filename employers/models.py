@@ -19,7 +19,7 @@ class Employers(models.Model):
       ordering = ['-date_created']
 
    def __str__(self):
-      return f"{self.name} - {self.location}"
+      return f"{self.name}-{self.user} - {self.location}"
 
      
 

@@ -3,15 +3,19 @@
 
 {% block content %}
 
-
+<style>
+    .row{
+        margin-bottom: 50px;
+    }
+</style>
 
 
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-12">
         <div class="card mx-auto" style="width: 40rem;">
             <div class="card-body">
                 <h5 class="card-title mb-3">create A Job AD</h5>
-                <form action="POST">
+                <form method="POST">
                     {% csrf_token %}
                     <div class="mb-3">
                         <label for="exampleInputEmail" class="form-label">Job Title</label>
@@ -23,8 +27,8 @@
                             {% render_field form.city class="form-control" %}
                             </div>
                             <div class="mb-3">
-                                <label for="exampleInputEmail" class="form-label">State </label>
-                                {% render_field form.state class="form-control" %}
+                                <label for="exampleInputEmail" class="form-label">Location </label>
+                                {% render_field form.location class="form-control" %}
                                 </div>
                                 <div class="mb-3">
                                     <label for="exampleInputEmail" class="form-label">Industry </label>

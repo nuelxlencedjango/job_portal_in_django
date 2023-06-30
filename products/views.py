@@ -6,15 +6,15 @@ from .filters import JobFilter
 
 
 def index(request):
-    filter = JobFilter(request.GET, queryset=JobsCreated.objects.filter(is_available=True).order_by('-date_created'))
+    filter = JobFilter(request.GET, queryset=AvailableJobs.objects.filter(is_available=True).order_by('-date_created'))
     context={'filter':filter}
-    return render(request,'layouts/base.html',context)
-    #return render(request,'general/index.html',context)
+    #return render(request,'layouts/base.html',context)
+    return render(request,'general/index.html',context)
 
 
 
 def jobListing(request):
-    available_jobs = JobsCreated.objects.filter(is_available=True).order_by('-timestamp')
+    available_jobs = AvailableJobs.objects.filter(is_available=True).order_by('-timestamp')
     context={'available_jobs':available_jobs}
 
     return render(request,'jobs/available_jobs.html',context)
@@ -22,15 +22,15 @@ def jobListing(request):
 
 
 def jobDetails(request,pk):
-    job_details = JobsCreated.objects.get(pk=pk)
+    job_details = AvailableJobs.objects.get(pk=pk)
     context={'job_details':job_details}
 
     return render(request,'jobs/job_details.html',context)
 
 
 def manageJobsCreated(request):
-    if JobsCreated.objects.filter(user=request.user,employers=request.user.employer).exists():
-        allJobs =JobsCreated.objects.filter(user=request.user,employers=request.user.employer)
+    if AvailableJobs.objects.filter(user=request.user,employers=request.user.employer).exists():
+        allJobs =AvailableJobs.objects.filter(user=request.user,employers=request.user.employer)
         context={'allJobs':allJobs}
         return render(request,'jobs/all_employers_posted_jobs.html',context)
     
@@ -41,7 +41,7 @@ def manageJobsCreated(request):
 
 def apply_to_job(request,pk):
     if request.user.is_authenticated:
-        job =JobsCreated.objects.get(pk=pk)
+        job =AvailableJobs.objects.get(pk=pk)
         if ApplyJob.objects.filter(user=request.user,job=pk).exists():
             messages.warning(request,"You have already applied for this job")
             return redirect('dashboard:dashboards')
@@ -59,7 +59,7 @@ def apply_to_job(request,pk):
     
 
 def all_applicants(request,pk):
-    job =JobsCreated.objects.get(pk=pk)
+    job =AvailableJobs.objects.get(pk=pk)
     applicants =job.applyjob_set.all()
     context={'job':job, 'applicants':applicants}
     return render(request,'job/all_applicants.html',context)

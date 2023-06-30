@@ -6,7 +6,7 @@ from resume.models import *
 
 
 
-class State(models.Model):
+class Location(models.Model):
    name = models.CharField(max_length=200)
 
    def __str__(self):
@@ -20,7 +20,7 @@ class Industry(models.Model):
       return self.name
 
 
-class JobsCreated(models.Model):
+class AvailableJobs(models.Model):
    job_type_choices=(
       ('Remote','Remote'),
       ('Onsite','Onsite'),
@@ -31,7 +31,7 @@ class JobsCreated(models.Model):
    #img = CloudinaryField(blank=True,null=True)
    title = models.CharField(max_length=200)
    city = models.CharField(max_length=200)
-   state = models.ForeignKey(State, on_delete=models.CASCADE,blank=True,null=True)
+   location = models.ForeignKey(Location, on_delete=models.CASCADE,blank=True,null=True)
    salary = models.PositiveIntegerField(default=35000)
    requirements = models.TextField()
    ideal_candidate =models.TextField()
@@ -43,7 +43,7 @@ class JobsCreated(models.Model):
 
 
    class Meta:
-      verbose_name_plural='JobCreated'
+      verbose_name_plural='AvailableJobs'
        
       ordering = ['-date_created']
 
@@ -60,7 +60,7 @@ class ApplyJob(models.Model):
       ('Pending','Pending')
       )
    user = models.ForeignKey(User, on_delete=models.CASCADE)
-   job = models.ForeignKey(JobsCreated, on_delete=models.CASCADE)
+   job = models.ForeignKey(AvailableJobs, on_delete=models.CASCADE)
    timestamp =models.DateTimeField(auto_now_add=True)
    status = models.CharField(max_length=20, choices=status_choices)
    

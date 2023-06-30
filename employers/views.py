@@ -8,19 +8,19 @@ from account.models import User
 
 def updateCompany(request):
     
-    if Employers.objects.get(user=request.user).exists():
+    if Employers.objects.get(user=request.user):
 
         company = Employers.objects.get(user=request.user)
         if request.method == "POST":
             form = UpdateCompanyForm(request.POST, instance=company)
             if form.is_valid():
                 comp =form.save(commit=False)
-                employer = User.objects.get(id=request.user.id)
-                employer.has_company =True
+                employer = User.objects.get(username=request.user)
+                employer.is_company =True
                 comp.save()
                 employer.save()
-
                 messages.warning(request,'Your details have been updated')
+                return redirect('dashboard:dashboards') 
 
             else:
                 messages.warning(request,'invalid form.Please check your details')  

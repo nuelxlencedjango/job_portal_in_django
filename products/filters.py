@@ -1,10 +1,10 @@
 import django_filters
-from job.models import JobsCreated
+from job.models import AvailableJobs
 
 
 
 class JobFilter(django_filters.FilterSet):
     title =django_filters.CharFilter(lookup_expr='icontains')
     class Meta:
-        model= JobsCreated
-        fields =['title','state','job_type','industry']
+        model= AvailableJobs
+        fields =['title','location','job_type','industry']

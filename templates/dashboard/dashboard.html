@@ -8,7 +8,7 @@
 {% if request.user.is_applicant %}
 {% if not request.user.has_resume %}
 <div class="alert alert-danger">
-    <b>You are seeing this because you not created any company account yet. Create one <a href="{% url 'artisan_register' %}">Here</a></b>
+    <b>You are seeing this because you do not have  any company account yet. Create one <a href="{% url 'account:artisan_register' %}">Here</a></b>
 </div>
 <section>
     <div class="p-5 mb-4 bg-light rounded-3">
@@ -36,5 +36,6 @@
         </div>
     </div>
 </section>
+{% endif %}
 {% endif %}
 {% endblock %}

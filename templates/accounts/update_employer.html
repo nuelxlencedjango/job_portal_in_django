@@ -3,14 +3,19 @@
 
 {% block content %}
 
+<style>
+    .row{
+        margin-bottom: 50px;
+    }
+</style>
 
 
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-12">
         <div class="card mx-auto" style="width: 40rem;">
             <div class="card-body">
                 <h5 class="card-title mb-3">create a profile</h5>
-                <form action="POST">
+                <form method="POST">
                     {% csrf_token %}
                     <div class="mb-3">
                         <label for="exampleInputEmail" class="form-label">Company Name </label>
@@ -30,10 +35,7 @@
                                 <label for="exampleInputEmail" class="form-label">State </label>
                                 {% render_field form.state class="form-control" %}
                                 </div>    
-                                <!--<div class="mb-3">
-                                    <label for="exampleInputEmail" class="form-label">Country</label>
-                                    <input type="text" class="form-control">
-                                    </div>-->   
+                              
                         <button type="submit" class="btn btn-danger">Submit</button>
                 </form>
             </div>
