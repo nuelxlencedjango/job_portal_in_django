@@ -8,7 +8,6 @@ from .filters import JobFilter
 def index(request):
     filter = JobFilter(request.GET, queryset=AvailableJobs.objects.filter(is_available=True).order_by('-date_created'))
     context={'filter':filter}
-    #return render(request,'layouts/base.html',context)
     return render(request,'general/index.html',context)
 
 
@@ -22,15 +21,23 @@ def jobListing(request):
 
 
 def jobDetails(request,pk):
-    if ApplyJob.objects.filter(user=request.user,job=pk).exists():
-        has_applied = True
+    if  request.user.is_authenticated:
+
+        if ApplyJob.objects.filter(user=request.user,job=pk).exists():
+            has_applied = True
+        else:
+            has_applied = False
+            
+        job_details = AvailableJobs.objects.get(pk=pk)   
+        context={'job_details':job_details,"has_applied":has_applied}
+        return render(request,'jobs/job_details.html',context)
+        
     else:
-        has_applied = False
+        messages.info(request,'You have to login first,please.')   
+        return redirect('account:login')  
+    
+    
 
-    job_details = AvailableJobs.objects.get(pk=pk)    
-    context={'job_details':job_details,"has_applied":has_applied}
-
-    return render(request,'jobs/job_details.html',context)
 
 
 def manageJobsCreated(request):
