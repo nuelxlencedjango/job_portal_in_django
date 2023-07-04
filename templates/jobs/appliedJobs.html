@@ -14,7 +14,7 @@
                     <th scope="col"> Salary</th>
                     <th scope="col">Job Type</th>
                     <th scope="col">Industry</th>
-                  
+                    <th scope="col">Status</th>
                     <th scope="col">Action</th>
                 </tr>
             </thead>
@@ -22,11 +22,12 @@
                 {% for job in appliedJobs %}
                 <tr>
                     <td>{{ job.job.title }}</td>
-                    <td>{{ job.job.city }}, {{ job.job.state }}</td>
+                    <td>{{ job.job.location }}, {{ job.job.city }}</td>
                     <td>{{ job.job.salary }}</td>
                     <td>{{ job.job.job_type }}</td>
                    
                     <td> {{ job.job.industry }}</td>
+                    <td> <button class="btn btn-danger">{{ job.status }}</button></td>
                     <td><a href="{% url 'products:job-details' job.job.pk %}">View Job</a></td>
                  
                 </tr>

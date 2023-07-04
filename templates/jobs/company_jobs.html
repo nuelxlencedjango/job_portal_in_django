@@ -1,0 +1,68 @@
+{% extends 'layouts/base.html' %}
+{% load widget_tweaks %}
+{% load humanize %}
+
+{% block content %}
+
+
+
+
+
+
+
+<div class="card mx-auto" style="width: 76rem;">
+    <div class="card-body">
+        <h5 class="card-title mb-3">All job ads  posted </h5>
+        <table class="table table-bordered">
+        
+           
+            <thead>
+                <tr>
+                    <th>Job Title</th>
+                    <th>
+                       Location
+                    </th>
+                    <th>
+                        Salary
+                    </th>
+                    <th>
+                      Availablity
+                    </th>
+                    <th>
+                        Requirements
+                    </th>
+                    <th>
+                        Ideal candidate
+                    </th>
+                    <th>Job type</th>
+                    <th> Date Posted</th>
+                  
+                    <th>
+                       Action
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for job in jobs %}
+                <tr>
+                    <td>{{ job.title}}</td>
+                    <td>{{ job.location }}</td>
+                    <td>{{ job.salary }}</td>
+                    <td>{{ job.is_available }}</td>
+                    <td>{{ job.requirements }}</td>
+                    <td>{{ job.ideal_candidate }}</td>
+                    <td>{{ job.job_type }}</td>
+                    <td>{{ job.date_created }}</td>
+                    <td><a target="_blank" href="{% url 'products:all-applicants' job.pk %}"><small>View Application</small></a></td>
+                   
+                
+                  
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+{% endblock %}

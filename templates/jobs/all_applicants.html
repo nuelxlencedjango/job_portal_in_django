@@ -3,9 +3,14 @@
 {% load humanize %}
 
 {% block content %}
+<style>
+  
+
+</style>
+<h5 class="card-title mb-3">All Applicants for {{ job.title }}positions</h5>
 <div class="card mx-auto" style="width: 76rem;">
     <div class="card-body">
-        <h5 class="card-title mb-3">All Applicants for {{ job.title }}positions</h5>
+
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -13,32 +18,46 @@
                     <th>
                        Surname
                     </th>
+                    <th>Location</th>
                     <th>
-                        Salary
+                        Registred As
                     </th>
                     <th>
-                       Location
+                       Job applied for
                     </th>
-                    <th>
-                        Job Position
-                    </th>
+                    
                     <th>Application Date</th>
+                    <th>Status </th>
+                    <th>Email </th>
                     <th>
-                       Action
+                       Resume
                     </th>
+                    <th>Action</th>
                 </tr>
+
             </thead>
+
+         
+       
             <tbody>
                 {% for apply in applicants %}
                 <tr>
-                    <td>{{ apply.user.resume.firest_name }}</td>
+                    <td>{{ apply.user.resume.first_name }}</td>
                     <td>{{ apply.user.resume.surname }}</td>
                     <td>{{ apply.user.resume.location }}</td>
                     <td>{{ apply.user.resume.job_title }}</td>
-                    <td>{{ apply.user.resume.timestamp }}</td>
+                    <td>{{ apply.job.title }}</td>
+                    <td>{{ apply.timestamp|naturaltime }}</td>
+                    <td>{{ apply.status}}</td>
+                    <td>{{ apply.user}}</td>
                     <td><a target="_blank" href="{{ apply.user.resume.upload_resume.url }}"><small>Download Resume</small></a></td>
-                   
-                
+                    {% if apply.status == "Accepted" %}
+                     <td><button class="btn btn-success">Accepted</button></td>
+                    {% elif apply.status == "Declined" %} 
+                    <td><button class="btn btn-danger">Rejected</button></td>
+                    {% else %}
+                    <td><a href="{% url 'products:accepted' apply.pk %}" class="btn btn-success" type="submit">Accept</a> <a href="{% url 'products:declined' apply.pk %}" class="btn btn-danger" type="submit">Decline</a></td>
+                   {% endif %}
                   
                 </tr>
                 {% endfor %}

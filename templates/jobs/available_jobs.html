@@ -3,60 +3,40 @@
 
 {% block content %}
 
-<section>
-    <div class="p-5 mb-4 bg-light rounded-3">
-        <div class="container-fluid py-5">
-            <h2 class="disply-5 fw-bold">Get Hired Quickly</h2><br>
-                <div class="card">
-                    <div class="card-body">
-                        <form class="row gy-2 gx-3 align-items-center">
-                            <div class="col-sm-2">
-                                <label for="" class="visually-hidden" for="autoSizingInput">Name</label>
-                                    <input type="text" class="form-control" id="autoSizingInput" placeholder="Job keyword">
-                                </div>
 
-                                <div class="col-sm-2">
-                                    <label for="" class="visually-hidden" for="autoSizingInput">Select Location</label>
-                                    <select name="" class="form-select" id="autoSizingInput">
-                                        <option selected>Select Location</option>
-                                        <option value="1">one</option>
-                                        <option value="2">two</option>
-                                        <option value="3">three</option>
-                                    </select>
-                                </div>
+<style>
+    a{
+        text-decoration: none;
+    }
+    .row{
+        margin-bottom: 100px;
+    }
+</style>
 
-                                <div class="col-sm-2">
-                                    <label for="" class="visually-hidden" for="autoSizingInput">Choose Job Type</label>
-                                    <select name="" class="form-select" id="autoSizingInput">
-                                        <option selected>Select job type</option>
-                                        <option value="1">one</option>
-                                        <option value="2">two</option>
-                                        <option value="3">three</option>
-                                    </select>
-                                </div>
-
-                                <div class="col-sm-2">
-                                    <label for="" class="visually-hidden" for="autoSizingInput">Select Industry</label>
-                                    <select name="" class="form-select" id="autoSizingInput">
-                                        <option selected>Select Industry</option>
-                                        <option value="1">one</option>
-                                        <option value="2">two</option>
-                                        <option value="3">three</option>
-                                    </select>
-                                </div>
-                                <div class="col-auto">
-                                    <button type="submit" class="btn btn-danger">Search</button>
-                                </div>
-                        </form>    
-                        </div>
-                    </div>
-                    <p class="col-md-8 fs-6 mt-3">
-                        Welcome job search portal!Search and get your dream job here..We have thousands of job offerings for you.dont forget to leave a like when you get a job.Good luck!!
-                    </p>
-                    <button type="button" class="btn btn-danger">More Jobs</button>
-                </div>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for job in available_jobs %}
+    <div class="col">
+        <a href="{% url 'products:job-details' job.pk %}">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">{{ job.title }}</h5>
+                    <p class="card-text">Industry: {{ job.industry }}</p>
+                    <p class="card-text">Job Type: {{ job.job_type }}</p>
+                    <p class="card-text">Location: {{ job.city }}, {{ job.state }}</p>
+                    <p class="card-text">Salary: {{ job.salary }}</p>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">{{ job.date_created }}</small>
+                <!--|naturaltime-->
+            </div>
+        </div>
+        </a>
     </div>
-</section>
+    {% endfor %}
+</div>
+
+
+
 
 <div>
 <div class="row row-cols-1 row-cols-md-3 g-4">
@@ -109,7 +89,7 @@
     </div>
 </div>
 </div>
-<div class="row align-items-center">
+<!--<div class="row align-items-center">
     <div class="col-md-20 mx-auto col-lg-2 mt-4">
         <nav aria-label="">
             <ul class="pagination">
@@ -123,7 +103,7 @@
             </ul>
         </nav>
     </div>
-</div>
+</div>-->
 
 
 

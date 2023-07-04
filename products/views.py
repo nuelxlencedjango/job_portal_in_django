@@ -13,7 +13,7 @@ def index(request):
 
 
 def jobListing(request):
-    available_jobs = AvailableJobs.objects.filter(is_available=True).order_by('-timestamp')
+    available_jobs = AvailableJobs.objects.filter(is_available=True).order_by('-date_created')
     context={'available_jobs':available_jobs}
 
     return render(request,'jobs/available_jobs.html',context)
@@ -76,4 +76,51 @@ def all_applicants(request,pk):
     job =AvailableJobs.objects.get(pk=pk)
     applicants =job.applyjob_set.all()
     context={'job':job, 'applicants':applicants}
-    return render(request,'job/all_applicants.html',context)
+    return render(request,'jobs/all_applicants.html',context)
+
+
+
+def companyJobs(request):
+    if AvailableJobs.objects.filter(user=request.user).exists():
+        jobs =AvailableJobs.objects.filter(user=request.user)
+
+        context={'jobs':jobs}
+        return render(request,'jobs/company_jobs.html',context)
+    
+    messages.info(request,'You dont have any job ads yet.')
+    return redirect('dashboard:dashboards')
+
+
+def decisionAccept(request,pk):
+    if ApplyJob.objects.get(pk=pk):
+        job_item=ApplyJob.objects.get(pk=pk)
+        job_item.status = "Accepted"
+        job_item.save()
+        #AvailableJobs.objects.filter(pk=job_item.job.pk).update(is_available = False)
+        posted_job=AvailableJobs.objects.get(pk=job_item.job.pk)
+        posted_job.is_available = False
+        posted_job.save()
+       
+        messages.info(request,'Job offer was successful.')
+        return redirect('dashboard:dashboards')
+    
+    else:
+        messages.info(request,'Job not available.')
+        return redirect('/')
+    
+
+
+def declinedApplication(request,pk):
+    if ApplyJob.objects.get(pk=pk):
+        job_item=ApplyJob.objects.get(pk=pk)
+        job_item.status = "Declined"
+        job_item.save()
+        messages.info(request,'Application  was declined.')
+        return redirect('dashboard:dashboards')
+    
+    else:
+        messages.info(request,'Job not available.')
+        return redirect('/')    
+       
+    
+    
