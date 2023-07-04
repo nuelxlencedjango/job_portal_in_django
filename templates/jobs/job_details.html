@@ -8,12 +8,18 @@
 <section>
     <div class="p-5 mb-4 bg-light rounded-3">
         <div class="container-fluid py-5">
-            <h2 class="disply-5 fw-bold">{{ available_jobs.title }}</h2><br>
-              <p class="col-md-8 fs-5 mt-3">{{ available_jobs.state }}|{{ available_jobs.job_type }}|$<span>{{ available_jobs.salary|intcomma}}</span></p>
-              {% if has_applied == False %}
-              <a href="{% url 'product:apply-job' available_jobs.pk %}" class="btn btn-danger btn-lg">Apply Now</a> 
-              {% else %}
+            <h2 class="disply-5 fw-bold">{{ job_details.title }}</h2>
+            <p>{{job_details.job_type }}</p>
+            <br>
+              <p class="col-md-8 fs-5 mt-3">{{ job_details.location }}|{{ job_details.job_type }}|$<span>{{ job_details.salary|intcomma}}</span></p>
+              <p>Requirements: {{ job_details.requirements }}</p>
+              <p>Advantage: {{ job_details.ideal_candidate }}</p>
+              <p>{{ job_details.created_on }}</p> 
+    
+              {% if has_applied == True %}
               <p><span class="text-danger">You have already applied for this job</span></p>
+              {% else %}
+              <a href="{% url 'products:apply-job' job_details.pk %}" class="btn btn-danger btn-lg">Apply Now</a>
               {% endif %}
         </div>
        

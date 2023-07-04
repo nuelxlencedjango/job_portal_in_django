@@ -14,13 +14,6 @@
 
 
 
-
-
-
-
-
-
-
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
       <a href="" class="navbar-brand">NuelJobPortals</a>
@@ -44,12 +37,13 @@
                 <li class="nav-item">
                   <a class="nav-link" href="#">Guidlines</a>
                 </li>
+          
                 {% if request.user.is_authenticated %}
 
                 {% if request.user.is_applicant %}
 
-                {% if request.user.has_resume %}
-                <li class="nav-item"><a class="nav-link" href="#">Apply to jobs</a></li>
+                {% if request.user.is_resume %}
+                <li class="nav-item"><a class="nav-link" href="{% url 'products:home' %}">Apply to jobs</a></li>
 
                 <li class="nav-item">
                   <a class="nav-link active" aria-current="page" href="{% url 'job:applied-jobs' %}">
@@ -57,10 +51,13 @@
                 </li>
                 {% else %}
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Create Resume</a>
+                  <a class="nav-link" href="{% url 'resume:resume_update' %}">Create Resume</a>
                 </li>
                 {% endif %}
-
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'account:logout' %}">Logout</a>
+                </li>
+                
                 {% elif request.user.is_recruiter %}
       
                 {% if request.user.is_company %}

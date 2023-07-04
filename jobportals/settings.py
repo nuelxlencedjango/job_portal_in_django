@@ -23,13 +23,13 @@ import cloudinary.api
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-%c4h)l6(0$rl2a^&jqac%5geaqu@29vgvu9-fa$bqqpfw%$-3a'
-#SECRET_KEY=os.environ.get('SECRET_KEY')
+
+SECRET_KEY=os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-#DEBUG = os.environ.get('DEBUG')
-#ALLOWED_HOSTS = []
-ALLOWED_HOSTS = ['127.0.0.1', 'web-production-85af.up.railway.app','www.jesuschristglobalministries.com','jesuschristglobalministries.com']
+
+DEBUG = os.environ.get('DEBUG')
+
+ALLOWED_HOSTS = ['127.0.0.1',]
 
 
 # Application definition
@@ -60,10 +60,6 @@ INSTALLED_APPS = [
     'django_filters',
      'widget_tweaks',
      'mathfilters',
-
-
-     #'django_celery_results',
-     #'django_celery_beat',
       'fontawesomefree'
 ]
 

@@ -1,0 +1,61 @@
+{% extends 'layouts/base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+<style>
+    .row{
+        margin-bottom: 50px;
+    }
+</style>
+
+
+{% if form.errors %}
+<p>{{ form.errors }}</p>
+{% endif %}
+
+<h5 class="card-title mb-3">Create A Resume </h5>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card mx-auto" style="width: 40rem;">
+            <div class="card-body">
+               
+                <form action="{% url 'resume:resume_update' %}" method="POST"  enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="exampleInputEmail" class="form-label">First Name </label>
+                        {% render_field form.first_name class="form-control" %}
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="exampleInputEmail" class="form-label">Surname</label>
+                            {% render_field form.surname class="form-control" %}
+                            </div>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail" class="form-label">Job Title </label>
+                            {% render_field form.job_title class="form-control" %}
+                            </div>
+
+                        <div class="mb-3">
+                            <label for="exampleInputEmail" class="form-label">Profile Image </label>
+                            {% render_field form.img class="form-control" %}
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail" class="form-label">Location </label>
+                                {% render_field form.location class="form-control" %}
+                                </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail" class="form-label">Resume </label>
+                                {% render_field form.upload_resume class="form-control" %}
+                                </div>    
+                              
+                        <button type="submit" class="btn btn-danger">Submit</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

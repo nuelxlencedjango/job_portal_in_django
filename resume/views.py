@@ -8,28 +8,49 @@ from account.models import User
 
 
 def updateResume(request):
-        if Resume.objects.get(user=request.user).exists():
+
+        #if Resume.objects.filter(user=request.user).exists():
+    if request.user.is_applicant and request.method == "POST":     
+    #if request.user.is_applicant:
+        if Resume.objects.filter(user=request.user).exists():
             resume = Resume.objects.get(user=request.user)
-            if request.method == "POST": 
-                form = ResumeForm(request.POST,request.FILES, instance=resume)
-                if form.is_valid():
-                    detail =form.save(commit=False)
-                    worker = User.objects.get(id=request.user.id)
-                    worker.has_resume =True
-                    detail.save()
-                    worker.save()
-                    messages.warning(request,'Your resume has been updated')
-                    return redirect('dashboard:dashboards')
+            
+            form = ResumeForm(request.POST,request.FILES, instance=resume)
+            
+            if form.is_valid():
+                detail =form.save(commit=False)
+                worker = User.objects.get(id=request.user.id)
+                    #worker.is_resume =True
+                detail.save()
+                worker.save()
+                messages.warning(request,'Your resume has been updated')
+                return redirect('dashboard:dashboards')
 
-                else:
-                    messages.warning(request,'invalid form.Please check your details')  
+            else:
+                messages.warning(request,'invalid form.Please check your details')  
 
-            form = ResumeForm(instance=resume)
-            context={'form':form}
-            return render(request,'accounts/update_employer.html',context)   
+                form = ResumeForm(request.POST,instance=resume)
+                context={'form':form}
+                return render(request,'accounts/update_employer.html',context)   
+        
 
-        return redirect('account:artisan-register') 
-
+        form = ResumeForm(request.POST,request.FILES)
+        if form.is_valid():
+                detail =form.save(commit=False)
+                worker = User.objects.get(email=request.user.email)
+                worker.is_resume =True
+                detail.user = request.user
+                worker.save()
+                detail.save()
+                
+                messages.warning(request,'Your resume has been updated')
+                return redirect('dashboard:dashboards')
+        
+    form = ResumeForm()
+    context={'form':form}
+    return render(request,'accounts/resumee.html',context) 
+    
+    
 
 
 

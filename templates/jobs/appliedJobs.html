@@ -27,7 +27,7 @@
                     <td>{{ job.job.job_type }}</td>
                    
                     <td> {{ job.job.industry }}</td>
-                    <td><a href="{% url 'job:job-details' job.job.pk %}">View Job</a></td>
+                    <td><a href="{% url 'products:job-details' job.job.pk %}">View Job</a></td>
                  
                 </tr>
                 {% endfor %}
